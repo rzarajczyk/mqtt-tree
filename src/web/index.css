@@ -1,0 +1,15 @@
+nav {
+	background-color: navy;
+}
+
+#tree {
+	overflow-y: auto;
+}
+
+#details {
+	white-space: pre-wrap;
+	font-family: monospace;
+	overflow-y: auto;
+	overflow-x: auto;
+	max-height: 600px;
+}
