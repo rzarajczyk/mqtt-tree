@@ -46,7 +46,7 @@ ACTIONS = [
     StaticResources('/', './src/web')
 ]
 
-server = http_server(80, ACTIONS)
+server = http_server(8075, ACTIONS)
 try:
     server.start(block_caller_thread=True)
 finally:
