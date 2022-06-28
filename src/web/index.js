@@ -1,21 +1,28 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-	document.querySelector('#copy-to-clipboard').addEventListener('click', event => {
-		navigator.clipboard.writeText(document.querySelector('#details').innerText)
+	document.querySelector('#copy-value-to-clipboard').addEventListener('click', event => {
+		navigator.clipboard.writeText(document.querySelector('#node-value').innerText)
+		M.toast({html: 'Content copied!', displayLength: 1000})
+	})
+	document.querySelector('#copy-name-to-clipboard').addEventListener('click', event => {
+		navigator.clipboard.writeText(document.querySelector('#node-name').innerText)
+		M.toast({html: 'Content copied!', displayLength: 1000})
+	})
+	document.querySelector('#copy-path-to-clipboard').addEventListener('click', event => {
+		navigator.clipboard.writeText(document.querySelector('#node-path').innerText)
+		M.toast({html: 'Content copied!', displayLength: 1000})
 	})
 
 	const CACHE = new Map()
 
 	function shorten(response) {
 		return response.map(it => {
-			if (it.text.includes('<span>')) {
-				const name = it.text.replace(/<span>.*/, '')
-				const value = it.text
-						.replace(/^.*<span>/, '')
-						.replace(/<\/span>$/, '')
-				CACHE.set(it.id, value)
+			CACHE.set(it.id, it)
+			if (it.value != null) {
 				const MAX_LENGTH = 60
-				const truncatedValue = value.length > MAX_LENGTH + 3 ? `${value.substring(0, MAX_LENGTH)}...` : value
-				it.text = `${name} <b>${truncatedValue}</b>`
+				const truncatedValue = it.value.length > MAX_LENGTH + 3 ? `${it.value.substring(0, MAX_LENGTH)}...` : it.value
+				it.text = `${(it.name)} <b>${truncatedValue}</b>`
+			} else {
+				it.text = it.name
 			}
 			it.children = shorten(it.children)
 			return it
@@ -48,8 +55,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 				}).on('changed.jstree', (e, data) => {
 					console.log(data)
 					const id = data.node.id
-					const value = CACHE.get(id)
-					document.querySelector('#details').innerHTML = renderValue(value)
+					const node = CACHE.get(id)
+					document.querySelector('#node-value').innerHTML = renderValue(node.value)
+					document.querySelector('#node-name span').innerHTML = node.name
+					document.querySelector('#node-path span').innerHTML = node.path
 				})
 			})
 })

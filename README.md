@@ -1,3 +1,3 @@
 # MQTT-Tree
 
-A MQTT client which provides a tree-like visualization of MQTT topics.
+A MQTT client which provides a web-based tree-like visualization of MQTT topics.

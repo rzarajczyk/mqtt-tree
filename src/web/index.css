@@ -6,8 +6,17 @@ nav {
 	overflow-y: auto;
 }
 
-#details {
-	white-space: pre-wrap;
+.description {
+	text-decoration: underline;
+}
+
+.value {
+	padding-left: 10px;
+	margin-bottom: 10px;
+}
+
+#node-value {
+	white-space: pre;
 	font-family: monospace;
 	overflow-y: auto;
 	overflow-x: auto;

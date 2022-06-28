@@ -26,12 +26,13 @@ class Node:
             self.nodes[child_id].debug(indent + '    ')
 
     def to_json(self, path=''):
-        unique_id = f'{path}_{self.id}' if len(path) > 0 else self.id
-        text = f'{self.id} = <span>{self.value}</span>' if self.value is not None else self.id
+        path = f'{path}/{self.id}' if len(path) > 0 else self.id
         return {
-            'id': unique_id,
-            'text': text,
-            'children': [node.to_json(unique_id) for node in self.nodes.values()]
+            'id': path,
+            'name': self.id,
+            'path': path,
+            'value': self.value,
+            'children': [node.to_json(path) for node in self.nodes.values()]
         }
 
 
