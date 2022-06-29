@@ -2,9 +2,9 @@
 
 A MQTT client which provides a web-based tree-like visualization of MQTT topics.
 
-## Usage in docker-compose
+## Deployment using docker-compose
 
-**docker-compose.yaml:**
+#### docker-compose.yaml
 ```yaml
 version: '3.2'
 services:
@@ -16,11 +16,19 @@ services:
     network_mode: host
 ```
 
-**mqtt-tree.yaml**
+#### mqtt-tree.yaml
 ```yaml
+port: 8075
 mqtt:
   broker: <<mqtt address>
   port: <<mqtt port>>
   username: <<mqtt username>>
   password: <<mqtt password>>
+```
+
+### Availability:
+
+The web interface is available at the specified port:
+```
+http://localhost:8075
 ```

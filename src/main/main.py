@@ -6,6 +6,8 @@ from tree import Tree
 
 config, logger, timezone = start_service()
 
+PORT = config.get('port', 8075)
+
 MQTT_HOST = config['mqtt']['broker']
 MQTT_PORT = config['mqtt']['port']
 MQTT_USER = config['mqtt']['username']
@@ -46,7 +48,7 @@ ACTIONS = [
     StaticResources('/', './src/web')
 ]
 
-server = http_server(8075, ACTIONS)
+server = http_server(PORT, ACTIONS)
 try:
     server.start(block_caller_thread=True)
 finally:
